@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.main{
+		width: 100%;height: 250px
+	}
+	.child{width: 100px;height: 30px;background-color: lightblue}
+	</style>
+	<script src="jquery-3.0.0.js"></script>
+	<script>
+		x=0;  
+		y=0;  
+		$(function(){
+			//题目一
+			// alert(1&&2)的结果是2
+			// 只要“&&”前面是false，无论“&&”后面是true还是false，结果都将返“&&”前面的值;
+			// 只要“&&”前面是true，无论“&&”后面是true还是false，结果都将返“&&”后面的值;
+
+			// alert(0||1)的结果是1
+			// 只要“||”前面为false,不管“||”后面是true还是false，都返回“||”后面的值。
+			// 只要“||”前面为true,不管“||”后面是true还是false，都返回“||”前面的值。
+
+			// alert(1&&2);//2
+			// alert(1||0);//1
+		 $("div.over").mouseover(function(){  
+		    $(".over span").text(x+=1);  
+		  });  
+		 $("div.over").mouseout(function(){  
+		    $(".over span").text(x+=1);  
+		  });  
+		  $("div.enter").mouseenter(function(){  
+		    $(".enter span").text(y+=1);  
+		  });  
+		  $("div.enter").mouseleave(function(){  
+		    $(".enter span").text(y+=1);  
+		  });  
+		  var str="a0_000"
+		  var reg = /^[a-zA-Z][a-zA-Z0-9_]{3,5}$/;  
+		  var r = str.match(reg);
+		  console.log(r)
+
+		  var str1="  a0_000  "
+
+		  console.log(str1.length)
+		   var reg1 = /(^\s*)|(\s*$)/;  
+		  var r1 = str.replace(reg1,"");
+		  console.log(r1.length)
+
+		})
+	</script>
+</head>
+<body>
+	<h1>2</h1>
+	<div class="main">
+		<p>不论鼠标指针穿过被选元素或其子元素，都会触发 mouseover 事件。</p>  
+		<p>只有在鼠标指针穿过被选元素时，才会触发 mouseenter 事件。</p>  
+		<p>mouseleave与mouseenter搭配，mouseover与mouseout一起用，性质原理都是一样的</p>  
+
+		<div class="over" style="background-color:lightgray;padding:20px;width:40%;float:left">  
+			<h2 style="background-color:white;">被触发的 Mouseover 事件：<span></span></h2>  
+		</div>  
+		<div class="enter" style="background-color:lightgray;padding:20px;width:40%;float:right">  
+			<h2 style="background-color:white;">被触发的 Mouseenter 事件：<span></span></h2>  
+		</div> 
+	</div>
+	<h1>3.用正则表达式匹配字符串，以字母开头，后面是数字、字符串或者下划线，长度为9-20</h1>
+
+
+</body>
+</html>
