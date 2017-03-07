@@ -1,0 +1,58 @@
+1，总是从ID选择器开始继承
+
+在jQuery中最快的选择器是ID选择器，因为它直接来自于JavaScript的getElementById()方法。
+例如有一段HTML代码：
+
+
+2，在class前使用tag(标签名)jQuery中class选择器是最慢的
+
+在jQuery中第二快的选择器是tag(标签)选择器( 比如：$("head") )。
+跟ID选择器累时，因为它来自原生的getElementsByTagName() 方法。 
+
+
+
+3在使用tag来修饰class的时候，我们需要注意以下几点：
+
+（1） 不要使用tag来修饰ID，如下所示：
+var content = $("div#content");
+这样一来，选择器会先遍历所有的div元素，然后匹配#content。
+（好像jQuery从1.3.1开始改变了选择器核心后，不存在这个问题了。暂时无法考证。）
+
+（2）不要画蛇添足的使用ID来修饰ID，如下所示：
+var traffic_light = $("#content #traffic_light");
+
+
+注：如果使用属性选择器，也请尽量使用tag来修饰，如下所示：
+$('p[row="c3221"]').html();而不是这样：$('[row="c3221"]').html();
+
+
+
+4，将jQuery对象缓存起来
+
+把jQuery对象缓存起来 就是要告诉我们 要养成将jQuery对象缓存进变量的习惯。
+
+
+
+5，冒泡
+ 
+
+除非在特殊情况下, 否则每一个js事件(例如:click, mouseover等.)都会冒泡到父级节点。
+当我们需要给多个元素调用同个函数时这点会很有用。
+
+代替这种效率很差的多元素事件监听的方法就是, 你只需向它们的父节点绑定一次。
+
+比如, 我们要为一个拥有很多输入框的表单绑定这样的行为: 当输入框被选中时为它添加一个class
+
+传统的做法是，直接选中input，然后绑定focus等，如下所示：(ul li)   ul.find('li')
+
+
+6:选择器 context 是由 .find() 方法实现的；因此，
+
+
+
+fu.click(function(e){
+	$click=e.target;
+
+})
+
+find()效率高

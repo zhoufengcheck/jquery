@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src='echarts.js'></script>
+	<script>
+	// 同时,我们亦可以,使用on()方法创建自己喜欢的事件名称，然后通过trigger来触发。举例如下：
+		$(function(){
+			var button1 = $('#button1'),
+			    button2 = $('#button2'),
+			    button3 = $('#button3'),
+			    clear = $('#clear'),
+			    div = $('#eventDiv');
+
+			div.on({
+			    jump : function(){
+			        alert('Jumped!');
+			    },
+
+			    punch : function(e,data){
+			        alert('Punched '+data+'!');
+			    },
+
+			    click1 : function(){
+			        alert('Simulated click!');
+			    }
+
+			});
+
+			button1.click(function(){
+			    div.trigger('jump');
+			});
+
+			button2.click(function(){
+			    // Pass data along with the event
+			    div.trigger('punch',['hard']);
+			});
+
+			button3.click(function(){
+			    div.trigger('click1');
+			});
+
+			clear.click(function(){
+			    //some clear code
+			});
+		})
+		
+	</script>
+</head>
+<body>
+	<button id="button1">Jump</button>
+	<button id="button2">Punch</button> 
+	<button id="button3">Click</button>
+	<button id="clear" style="float: right;">Clear</button> 
+	<div id="eventDiv">ddd</div>
+
+
+</body>
+</html>
