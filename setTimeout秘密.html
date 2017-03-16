@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	.main{
+		width: 100%;height: 250px
+	}
+	.child{width: 100px;height: 30px;background-color: lightblue}
+	</style>
+	<script src="jquery-3.0.0.js"></script>
+	<script>
+	//提出问题
+	function title1(){
+		for (var i=1; i<=5; i++) { 
+		    setTimeout( function timer() {
+		        console.log(i);///6,6,6,6,6
+		    }, i*1000 );
+		}
+
+		//即使我们将延迟时间设置为0，它定义的操作仍然需要等待所有代码执行完毕之后才开始执行。
+		var timer = setTimeout(function() {
+		    console.log('setTimeout actions.');//后输出
+		}, 0);
+		console.log('other actions.');//先输出
+
+		//那setTimeout(fn, 0)有什么用处呢？其实用处就在于我们可以改变任务的执行顺序！因为浏览器会在执行完当前任务队列中的任务，再执行setTimeout队列中积累的的任务。
+		document.querySelector('#one input').onkeydown = function() {  
+
+		  document.querySelector('#one span').innerHTML = this.value;   
+		};   
+		document.querySelector('#second input').onkeydown = function() {   
+		  setTimeout(function() {   
+		    document.querySelector('#second span').innerHTML = document.querySelector('#second input').value;   }, 0);
+		};  
+	}
+	//title2主要是让我们明白setTimeout的运行机制
+	function title2(){
+		console.log('title2开始啦！！！！！！！！！！！！！！！！！！！')
+		setTimeout(function() {
+		    console.log(a);
+		}, 0);
+
+		var a = 10;
+
+		console.log(b);//1 undefined
+		console.log(fn);//2输出函数体
+
+		var b = 20;
+
+		function fn() {
+		    setTimeout(function() {
+		        console.log('setTImeout 10ms.');
+		    }, 10);
+		}
+
+		fn.toString = function() {
+		    return 30;
+		}
+
+		console.log(fn);//3输出fn.toString
+
+		setTimeout(function() {
+		    console.log('setTimeout 20ms.');//5 输出setTImeout 20ms
+		}, 20);
+
+		fn();//4 输出setTImeout 10ms
+	}
+	//为解决该title中输出66666的问题，我们再title3()里面进行详细解答
+	function title3(){
+		console.log("title3开始啦！！！！！！！！！！！！！！！！！")
+		/**闭包解决**/
+		// for(var i=1;i<=5;i++){
+		// 	(function(i){
+		// 		setTimeout(function(){
+		// 			console.log(i)
+		// 		},i*1000)
+		// 	})(i)
+		// }
+		/***第三个参数解决,setTimeout不止两个参数****/
+		// for (var i=1; i<=5; i++) { 
+		// 	setTimeout( function timer(i) {
+		// 		console.log(i);
+		// 	}, i*1000,i );
+		// }
+		// 其实，setTimeout可以传入第三个参数、第四个参数….，它们表示神马呢？其实是用来表示第一个参数（回调函数）传入的参数。
+		// setTimeout(function(a, b){   
+		//   console.log(a);   // 3
+		//   console.log(b);   // 4
+		// },0, 3, 4);
+
+		
+		/***bind解决****/
+		for (var i=1; i<=5; i++) { 
+			setTimeout( function timer(i) {
+				console.log(i);
+			}.bind(null,i),i*1000);
+		}
+		/******利用let 由于let是块级作用域*****/ 
+		// for (let i=1; i<=5; i++) { 
+		// 	setTimeout( function timer() {
+		// 		console.log(i);
+		// 	},i*1000);
+		// }
+	}
+	//setTimeout 的 this指向问题
+	var a="我是全局的，输出我this指向window"
+	function title4(){
+		console.log('title4开始啦！！！！！！！！！！！！！！！')
+		var obj={
+			a:"我是局部的，输出我this指向obj",
+			test:function(){
+				console.log(this.a);
+				setTimeout(function(){
+					console.log(this.a)
+				},0)
+			}
+		}
+		//解释一波： 由于setTimeout() 方法是浏览器 window //对象提供的，因此第一个参数函数中的this其实是指向window对象，这跟变量的作用域有关。)
+		//不过我们可以通过使用bind()方法来改变setTimeout回调函数里的this
+		var obj2 = {   
+		  a: "我是局部的，输出我this指向obj2",   
+		  test: function() {   
+		  	console.log(this.a)
+		    setTimeout(function(){   
+		      console.log(this.a);   
+		    }.bind(this), 0);   
+		  }   
+		};
+		obj.test()
+		obj2.test()
+
+	}
+	$(function(){
+		// title1()
+	})
+	
+	// title2()
+	title3()
+	 // title4()
+	</script>
+</head>
+<body>
+	<div class="main">		
+    <h1>1 利用闭包，修改下面的代码，让循环输出的结果依次为1， 2， 3， 4， 5</h1>
+    <div id="one">
+    	<input type="text"><span></span>
+    </div>
+    <div id="second">
+    	<input type="text"><span></span>
+    </div>
+</body>
+</html>

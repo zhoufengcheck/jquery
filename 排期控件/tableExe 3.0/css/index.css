@@ -1,0 +1,27 @@
+*{padding: 0;margin: 0}
+body{background: lightyellow}
+.main{width: 80%;height: 600px;padding: 10px;position: absolute;top:0;left:0;right:0;bottom: 0;margin: auto;}
+
+/***************top*************/
+.main .top{width: 100%;height: 50px;padding-top: 50px;}
+.main .top select{width: 100px;height:30px;float: left;}
+.main .top ul{list-style: none;float: right;width: 50%;}
+.main .top ul li{width: 25%;float: left;}
+.main .top ul li span{float: left;display:inline-block;width: 20px;height: 20px;margin-right: 5px}
+.main .top ul li span.s1{background-color: #F1F0EC;}
+.main .top ul li span.s2{background-color: #cbdbf1;}
+.main .top ul li span.s3{background-color: #29f88f;}
+.main .top ul li span.s4{background-color: #3089f8;}
+
+/*********************#tables*********************/
+#tables{width: 100%;height:400px;} 
+#tables table{width:100%;height: 100%;}
+#tables table thead{background-color: #ddd}
+#tables table thead td{cellpadding:5px;}
+#tables table tr{text-align: center;}
+#tables table .table-head{width: 100px;background-color: #ddd}
+#tables table tr td{border: 1px solid #ccc;cellspacing:0;background-color: #cbdbf1;cursor: pointer;}
+#tables table .pointers{cursor:no-drop;}
+#tables table .disable{background-color: #F1F0EC}
+#tables table .my-occupy{background-color: #3089f8}
+#tables table .other-occupy{background-color: #29f88f;cursor:no-drop;}

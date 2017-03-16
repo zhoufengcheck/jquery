@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+	<script>
+		var str='2016-31-1';
+		// var result=str.match(/zhoufeng/);
+		// var result=str.match(/^\d{4}-\d{1,2}-\d{1,2}$/);
+		var result=str.match(/-(\d{1,2})$/)
+		if(result==null){
+			alert('error');
+		}
+		else{
+			for(i in result){
+				console.log(result[1]);
+				// alert(result[i]);
+			}
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
