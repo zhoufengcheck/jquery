@@ -77,7 +77,6 @@ function findMaxDuplicateChar(str){
 	return result_char
 }
 
-
 //Q4 冒泡排序算法 小到大 每比较一次，就把最小的提到最前面去
 function bubbleSort(arr){
 	var temp
@@ -111,11 +110,38 @@ function insertSort(arr){
 	console.log(arr)
 	return arr;
 }
+//Q4 快速排序  从小到大
+function quickSort(arr,left,right){
+	var i=left;
+	var j=right;
+	var temp=arr[left];
+	if(left>=right){
+　　　　return;
+	}
+	while(i!=j){
+	　   while(i<j&&arr[j]>=temp){
+		  j--;
+	    }　
+　　　　if(j>i){
+　　　　　　arr[i]=arr[j];
+		}
+　　　　while(i<j&&arr[i]<=temp){
+			i++;
+		}　　　
+　　　　if(i<j){
+　　　　　　arr[j]=arr[i];
+		}
 
+	}
+	arr[i]=temp;
+　　quickSort(arr,left,i-1);
+　　quickSort(arr,i+1,right);//递归右边
+}
 
-var arr=[1,2,3,4,4,2,1,4,6,7]
+var arr=[5,3,1,2,4,6,0]
 // checkPalindrom('12321');
 // Unique(arr);
 // findMaxDuplicateChar('aaaaaaaaavdasdadsf')
 // bubbleSort(arr)
 // insertSort(arr)
+//quickSort(arr,0,arr.length-1);
