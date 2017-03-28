@@ -32,7 +32,7 @@
 		};   
 		document.querySelector('#second input').onkeydown = function() {   
 		  setTimeout(function() {   
-		    document.querySelector('#second span').innerHTML = document.querySelector('#second input').value;   }, 0);
+		    document.querySelector('#second span').innerHTML = document.querySelector('#second input').value;}, 0);
 		};  
 	}
 	//title2主要是让我们明白setTimeout的运行机制
@@ -92,10 +92,17 @@
 
 		
 		/***bind解决****/
-		for (var i=1; i<=5; i++) { 
-			setTimeout( function timer(i) {
-				console.log(i);
-			}.bind(null,i),i*1000);
+		// for (var i=1; i<=5; i++) { 
+		// 	setTimeout( function timer(i) {
+		// 		console.log(i);
+		// 	}.bind(null,i),i*1000);
+		// }
+		/*************立即执行函数****************/
+		//“应该是立马输出 0 到 4 吧。”
+		for (var i = 0; i < 5; i++) {
+		  setTimeout((function(i) {
+		    console.log(i);
+		  })(i), i * 1000);
 		}
 		/******利用let 由于let是块级作用域*****/ 
 		// for (let i=1; i<=5; i++) { 
