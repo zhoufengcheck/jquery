@@ -1,0 +1,190 @@
+1:把首字母变成大写  注：\w表示数字字母下划线
+function ReplaceFirstUper(str)  
+ {     
+   str = str.toLowerCase();     
+   return str.replace(/\b([a-z])|\s([a-z])/g, function(m){  
+     return m.toUpperCase();  
+   });    
+ }  
+ console.log(ReplaceFirstUper("i am a student"))
+ var rex=new RegExp(/\w/)
+ console.log(rex.test("/"))
+
+^:匹配输入字符串的开始位置。（^：在[]里面用表示非，在[]外面用表示开头）
+$:匹配输入字符串的开始位置。
+
+\d:数字
+\D:非数字
+
+\w:数字字母下划线
+\W:非数字字母下划线
+
+\b:单词边界
+\B:非
+
+\f	匹配一个换页符。等价于 \x0c 和 \cL。
+\n	匹配一个换行符。等价于 \x0a 和 \cJ。
+\r	匹配一个回车符。等价于 \x0d 和 \cM。
+\s	匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。
+\S	匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。
+
+
+*	匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。
++	匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。
+?	匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。
+
+
+x|y:匹配x或者y都行
+
+(....):分组$1,$2、、、、
+
+
+
+
+
+
+、、、、、、、、、、、、、、、断言、、、、、、、、、、
+(?=X )
+
+零宽度正先行断言。仅当子表达式 X 在 此位置的右侧匹配时才继续匹配。例如，/w+(?=/d) 与后跟数字的单词匹配，而不与该数字匹配。此构造不会回溯。
+
+(?!X)
+
+零宽度负先行断言。仅当子表达式 X 不在 此位置的右侧匹配时才继续匹配。例如，例如，/w+(?!/d) 与后不跟数字的单词匹配，而不与该数字匹配 。
+
+(?<=X)
+
+零宽度正后发断言。仅当子表达式 X 在 此位置的左侧匹配时才继续匹配。例如，(?<=19)99 与跟在 19 后面的 99 的实例匹配。此构造不会回溯。
+
+(?<!X)
+
+零宽度负后发断言。仅当子表达式 X 不在此位置的左侧匹配时才继续匹配。例如，(?<!19)99 与不跟在 19 后面的 99 的实例匹配
+
+
+、、、、、、、、、、、、、、、、、、惰性匹配、、、、、、、、、、、、、、
+
+表5.懒惰限定符
+代码/语法	说明
+*?	   重复任意次，但尽可能少重复
++?	   重复1次或更多次，但尽可能少重复
+??	   重复0次或1次，但尽可能少重复
+{n,m}?	   重复n到m次，但尽可能少重复
+{n,}?	   重复n次以上，但尽可能少重复
+
+
+
+、、、、、、、、、、、、、正则里的方法、、、、、、、、、、、、、、、、、、、、、
+
+1：test方法，该方法用来测试某个字符串是否与正则匹配，匹配就返回true，否则返回false。
+
+2：exec:
+ var reg=/(\w)l(\w)/g;
+ var str="hello world hello 123 hello programmer hello test";
+ var arr=reg.exec(str);
+ console.log(str)
+ while(arr){
+   console.dir(arr);
+   console.log("lastIndex:"+reg.lastIndex);
+   arr=reg.exec(str);
+ }
+0:"ell"
+1:"e"
+2:"l"
+index:1
+input:"hello world hello 123 hello programmer hello test"
+length:3
+
+数组中第0个元素是匹配的子字符串，
+第二个元素是正则中的第一个子分组匹配的结果（如果有子分组，即正则中存在用圆括号括起来的分组），没有就算了
+第三个是正则中第二个子分组匹配的结果（如果有第二个子分组）...以此类推，
+3：compile方法
+
+、、、、、、、、、、、、、、String里面的方法、、、、、、、、、、、
+
+1：search
+    该方法是string对象的一个方法，用来查找第一次匹配的子字符串的位置，
+    如果找到就返回一个number类型的index值，否则返回-1,它返回的只是第一次匹配的位置。
+
+    var str="hello world";
+    console.log(str.search(/o/g));
+输出结果为4，可以看到尽管具有多个匹配结果而且也声明为全局匹配，但是还是返回的是第一个匹配到的子串的位置；
+
+2:replace方法
+
+该方法用来将字符串中的某些子串替换为需要的内容，接受两个参数，
+第一个参数可以为正则或者子字符串，表示匹配需要被替换的内容，
+第二个参数为被替换的新的子字符串。如果声明为全局匹配则会替换所有结果，否则只替换第一个匹配到的结果。
+
+代码如下：
+
+    var str="hello world,hello test";
+    console.log(str.replace(/hello/g,'hi'));
+
+结果为hi world,hi test
+
+如果将上面代码中的g修饰符去掉，则返回的结果是hi world,hello test
+
+function ReplaceFirstUper(str)  
+ {     
+   str = str.toLowerCase();     
+   return str.replace(/\b([a-z])|\s([a-z])/g, function(m){  
+     return m.toUpperCase();  
+   });    
+ }  
+
+3:split方法
+
+该方法主要用来将一个字符串拆分成一个数组，它接受一个正则或者子字符（串）作为参数，返回一个数组，简单情况下，
+我们不需要使用正则，只有在字符串拆分规则不统一的情况下才需要使用正则，如下：
+
+    var str="how|old*are    you";
+    var arr=str.split(/\||\*|\s+/);
+    console.log(arr);
+这里需要将str拆分为单词数组，由于每个单词之间存在不一样的分隔符，我们采取正则来匹配，结果如下：['how','old','are','you']
+
+4）match方法
+
+该方法接受一个正则作为参数，用来匹配一个字符串，它的输出结果在不是全局匹配的情况下和exec方法的结果一致即一个数组并带有额外的属性，
+如果采用全局匹配，则不返回任何和其被匹配字符串相关的信息，只返回匹配的结果。
+
+非全局匹配代码：
+
+    var reg2=/(\w)s(\w)/;
+    var str2="ws1esr";
+    var result=str2.match(reg2);
+    var i=0;
+  while(result){
+      i++;
+      if(i<=4){
+      console.dir(result);
+      console.log("lastIndex:"+reg2.lastIndex);
+      }
+      else{
+        break;
+      }
+  }
+0:"wsl"
+1:"w"
+2:"l"
+
+全局匹配
+    var reg3=/(\w)s(\w)/g;
+    var str4="ws1estqsa";
+    console.dir(str4.match(reg3));
+
+结果：ws1,est,qsa
+
+
+ 可以看到，在全局匹配下的时候，它不同于exec方法，它会一次性将所有匹配结果以数组形式返回，
+且这个数组没有其他属性用来指向被匹配字符串的信息，而exec方法在全局匹配下每次返回的依然是本次匹配的结果数组
+，且这个数组中只包含本次匹配信息，同时又拥有指向被匹配字符串的信息，即match方法在全局匹配下一次性返回了所有匹配结果，
+而exec在全局匹配下返回的依然是当次匹配结果。
+
+
+
+
+
+
+
+
+
