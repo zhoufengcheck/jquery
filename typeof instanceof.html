@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var i=1;
+		var str=new String("123")
+		var flag=false
+		var a
+		var obj=new Object()
+		console.log('///////////////////////typeof/////////////////////////')
+		console.log(typeof(i))
+		console.log(typeof(str))
+		console.log(typeof(flag))
+		console.log(typeof(a))
+		console.log(typeof(obj))
+		var numobj=new Number(3)
+		var strobj=new String('3')
+		var obj=new Object()
+		function Test(){}
+		var test=new Test()
+		var arr=[];
+		var reg=/\d/
+		console.log('///////////////////////instanceof//////////////////////')
+		console.log(strobj instanceof String)
+		console.log(numobj instanceof Number)
+		console.log(obj instanceof Object)
+		console.log(test instanceof Test)
+		console.log(arr instanceof Array)
+		console.log(reg instanceof RegExp)
+
+		 function str2num (num) {
+	        if(num==""||num==undefined){
+	            return null;
+	        }
+	        var _str = num.toString(),
+	            _i = /(\d+)(\d{3})/;
+	        for (; _i.test(_str);) {
+	            _str = _str.replace(_i, "$1" + ',' + "$2");
+	            console.log(_str)
+	        }
+	        return _str;
+	    }
+		console.log(str2num(12341011010));
+	</script>
+</head>
+<body>
+	1.typeof：可以用来确定一个变量的数据类型<br>
+	 typeof用以获取一个变量的类型，typeof一般只能返回如下几个结 果：number,boolean,string,function,object,undefined.对于Array,Null等特殊对象使用typeof 一律返回object，这正是typeof的局限性。<br><br>
+    2.instanceof：可以用来确定一个引用类型值的是什么类型的对象
+
+</body>
+</html>

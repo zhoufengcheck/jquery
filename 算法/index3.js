@@ -43,7 +43,44 @@ function getRandomStr(len) {
 	for( ; str.length < len; str += Math.random().toString(36).substr(2));
 	return str.substr(0, len);
 }
-var arr1=[3,4,2,7,1,8,9];
+
+//13如何实现数组的随机排序？
+
+function randSort2(arr){
+    var mixedArray = [];
+    while(arr.length > 0){
+            var randomIndex = parseInt(Math.random()*arr.length);
+            mixedArray.push(arr[randomIndex]);
+            arr.splice(randomIndex, 1);
+    }
+    console.log("随机排序"+mixedArray)
+    return mixedArray;
+}
+function randSort3(arr){
+     arr.sort(function(){
+     	return Math.random()-0.5 //大于0或者小于0即可
+     });
+     console.log("随机排序"+arr)
+     return arr
+}
+//这里可以看看parseInt
+//map() 把每个元素通过函数传递到当前匹配集合中，生成包含返回值的新的 jQuery 对象。
+//.map(callback(index,domElement))
+console.log(['1','2','3'].map(parseInt))
+
+
+
+//14把页面所有元素都加上边框，而且颜色随机不一样
+//forEach 是针对于数组遍历，这里用call,把$("*")这个类数组变成了数组，数组里面是js对象
+$(function(){
+    [].forEach.call($("*"),function(a){
+      // a.style.outline="1px solid #"+(~~(Math.random()*(1<<24))).toString(16)//js
+      $(a).css('outline',"1px solid #"+(~~(Math.random()*(1<<24))).toString(16))//jquery
+    })
+})
+
+var arr1 = [7,5,10,9,4,3,8,6,1,2];
+arr1=randSort3(arr1)
 arr1.sort(desc)
 console.log("降序"+arr1)
 var arr2=[3,4,2,7,1,8,9];
