@@ -1,0 +1,39 @@
+周报：http://donote.cig.com.cn/login/login?back=http://donote.cig.com.cn/weekly
+大数据平台中心：http://jw.tech.bitauto.com:8090/pages/viewpage.action?pageId=1081454
+git:http://git.ctags.cn/dashboard/projects\
+各种资源：http://192.168.56.81:8888/
+
+
+/***************angularjs***************/
+http://damoqiongqiu.iteye.com/blog/1971204 AngularJS：何时应该使用Directive、Controller、Service？
+http://blog.jobbole.com/62249/ AngularJS 指令实践指南（一）
+http://blog.jobbole.com/62999/ AngularJS 指令实践指南（二）
+http://blog.jobbole.com/54716/ 2013年AngularJS学习资源精选
+http://blog.jobbole.com/78946/ AngularJS开发人员最常犯的10个错误
+
+http://jw.tech.bitauto.com:8090/pages/viewpage.action?pageId=1901426///分享维护
+
+
+
+进入开发机
+   ssh root@192.168.56.96 123qwe
+进入目录
+   cd /home/wwwroot/angularbuild/
+执行命令
+   gulp watch --app pmpc  服务
+
+
+ssp
+git@git.ctags.cn:fed/ssp.git
+
+doc
+git@git.ctags.cn:fed/doc.git
+
+ssp 
+前端
+git@git.ctags.cn:fed/ssp.git
+后端
+http://git.ctags.cn/DAD/ssp.git
+
+autoV项目git地址
+http://git.ctags.cn/fed/autov/tree/master

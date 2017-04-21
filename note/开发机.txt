@@ -1,0 +1,111 @@
+#开发机相关知识
+
+##基本操作
+
+文件
+基本文件操作
+cd,mv,cp,ls,pwd,rm
+scp
+find
+grep
+mkdir
+chmod
+vim([:wq] [:q!] [i] [Esc][hjkl])
+网络
+防火墙 etc/sysconfig/iptables
+lsof -i:80
+kill -9 [pid]
+快捷键
+1.[Tab][Ctrl + C][Ctrl + D]
+
+##开发机环境
+
+npm
+--save-dev --save -g 区别
+npm install
+npm update 更新
+npm ls 列出当前安装的了所有包
+npm root 查看当前包的安装路径
+npm root -g 查看全局的包的安装路径
+npm remove 移除
+npm init 会引导你创建一个package.json文件，包括名称、版本、作者这些信息等
+ES6
+babel
+webpack
+entry: 打包成几个文件
+output: 打包目标文件名
+module: loaders 编译插件
+gulp
+var gulp = require('gulp');
+var connect = require('gulp-connect');
+var webpack = require('gulp-webpack');
+var _name = 'demo';
+
+gulp.task("webpack", function() {
+    return gulp
+        .src('./' + _name + '/js/pages/*.*')
+        .pipe(webpack({
+            entry: {
+                demo:'./' + _name + '/js/pages/index.jsx',
+                page:'./' + _name + '/js/pages/abc.jsx'
+            },
+            output: {
+                filename: '[name].js'
+            },
+            resolve: {
+                extensions: ['', '.js', '.jsx']
+            },
+            module: {
+                loaders: [{
+                    test: /\.jsx?$/,Ω
+                    loaders: ['babel']
+                }, {
+                    test: /\.css$/,
+                    loaders: ['style', 'css']
+                }]
+            }
+        }))
+        .pipe(gulp.dest(_name + '/assets'))
+        .pipe(connect.reload());
+});
+
+gulp.task('connect', function() {
+    connect.server({
+        root: '/home/gulp'
+    });
+});
+
+gulp.task('watch', function() {
+    gulp.watch(['./**/js/**/*.js', './**/js/**/*.jsx', './**/css/*.css'], ['webpack']);
+});
+
+//运行Gulp时，默认的Task
+gulp.task('default', ['connect', 'watch']);
+package.json
+{
+  "name": "webpack",
+  "version": "0.0.1",
+  "description": "",
+  "private": true,
+  "devDependencies": {
+    "babel-core": "^5.8.25",
+    "babel-loader": "^5.3.2",
+    "css-loader": "^0.18.0",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-uglify": "^1.4.2",
+    "gulp-webpack": "^1.5.0",
+    "jsx-loader": "^0.13.2",
+    "style-loader": "^0.12.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "alt": "^0.17.6",
+    "node-uuid": "^1.4.3",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  }
+}
