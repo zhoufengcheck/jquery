@@ -4,14 +4,15 @@
 	<meta charset="UTF-8">
 	<title>事件绑定</title>
 	<script src="../jquery-3.0.0.js"></script>	
-	<script src="index.js"></script>
-	<script src="index1.js"></script>
+	<script src="index2.js"></script>
 	<style>
 		.content{float: left;border: 1px solid red;margin-right: 10px}
 		.father{width: 500px;height: 300px;border: 1px solid red;float: left}
 		.child{width: 200px;height: 200px;border: 1px solid black;float: left}
 		.grandchild{width: 100;height: 100px;background-color: lightblue}
 		.item{width: 100px;height: 100px;background-color: blue;transition:0.3s;}
+		.fathers{width: 300px;height: 200px;border: 1px solid red;clear: both;}
+		.childs{width: 200px;height: 100px;border: 1px solid blue;margin:10px;}
 	</style>
 </head>
 <body>
@@ -38,6 +39,14 @@
 		<button id="fadeto">fadeto</button>
 		<button id="slidedown">slidedown</button>
 		<button id="animate">animate</button>
+	</div>
+	
+	<button id="mouse">鼠标事件</button>
+
+	<div class="fathers">
+		<div class="childs">
+			123
+		</div>
 	</div>
 </body>
 </html>
