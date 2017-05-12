@@ -1,0 +1,134 @@
+let变量
+1:不存在变量提升.
+
+  比如：
+  console.log(tem)//undefined
+  var tem=100
+
+  console.log(tem)//tem is not define
+  let tem=100
+
+2:暂时性死区：只要块级作用域内存在let命令，它所声明的变量就“绑定”（binding）这个区域，不再受外部的影响。
+
+	比如：
+	var tem=100
+	if(true){
+		temp=20;
+		let tem=100;//let绑定了该作用域，所以在let声明变量前，对tmp赋值会报错。
+	}
+	所以：
+	总之，在代码块内，使用let命令声明变量之前，该变量都是不可用的。这在语法上，称为“暂时性死区”（temporal dead zone，简称 TDZ）。
+
+	function bar(x = y, y = 2) {
+	  return [x, y];
+	}
+	bar(); 
+
+
+	ES6 规定暂时性死区和let、const语句不出现变量提升，主要是为了减少运行时错误，防止在变量声明前就使用这个变量，从而导致意料之外的行为。这样的错误在 ES5 是很常见的，现在有了这种规定，避免此类错误就很容易了。
+	总之一句话，没有声明完成之前就不要用，用了就报错
+
+3:不允许重复声明
+	// 报错
+	function () {
+	  let a = 10;
+	  var a = 1;
+	}
+
+	// 报错
+	function () {
+	  let a = 10;
+	  let a = 1;
+	}
+
+	function func(arg) {
+	  let arg; // 报错，参数里面已经有了
+	}
+
+	function func(arg) {
+	  {
+	    let arg; // 不同作用域不报错
+	  }
+	}
+	总之一句话，同一个作用于就不要声明同一个名字的变量
+
+4:块级作用域
+	ES5 只有全局作用域和函数作用域，没有块级作用域，这带来很多不合理的场景。
+	比如
+	a:第一种场景，内层变量可能会覆盖外层变量。
+		var tmp = new Date();
+		function f() {
+		  console.log(tmp);
+		  if (false) {
+		    var tmp = 'hello world';
+		  }
+		}
+		f(); // undefined
+	b:第二种场景，用来计数的循环变量泄露为全局变量。
+		var s = 'hello';
+		for (var i = 0; i < s.length; i++) {
+		  console.log(s[i]);
+		}
+
+		console.log(i); // 5------i没有消失，变成了全局变量
+
+5:ES6 的块级作用域（看的有点乱）
+	a:
+	function f1() {
+	  let n = 5;
+	  if (true) {
+	    let n = 10;
+	  }
+	  console.log(n); // 5
+	}
+	f1()
+
+	b:如果在ES5环境下，这个不报错，输出I am outside!，如果在ES6环境下，就会报错
+	function f() { console.log('I am outside!'); }
+	(function () {
+	  if (false) {
+	    // 重复声明一次函数f
+	    function f() { console.log('I am inside!'); }
+	  }
+	  f();
+	}());
+
+6:const
+	a:声明一个只读的常量。一旦声明，常量的值就不能改变。
+	b:const一旦声明变量，就必须立即初始化，不能留到以后赋值。
+	c:const的作用域与let命令相同：只在声明所在的块级作用域内有效。
+	d:const命令声明的常量也是不提升，同样存在暂时性死区，只能在声明的位置后面使用。
+	e:const声明的常量，也与let一样不可重复声明。
+		var message = "Hello!";
+		let age = 25;
+
+		// 以下两行都会报错
+		const message = "Goodbye!";
+		const age = 30;
+
+	总结：
+	const实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。
+	但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指针，const只能保证这个指针是固定的，至于它指向的数据结构是不是可变的，就完全不能控制了。因此，将一个对象声明为常量必须非常小心。
+
+		const foo = {};
+		// 为 foo 添加一个属性，可以成功
+		foo.prop = 123;
+		foo.prop // 123
+
+		// 将 foo 指向另一个对象，就会报错
+		foo = {}; // TypeError: "foo" is read-only
+
+	如果真的想将对象冻结，应该使用Object.freeze方法。
+
+	const foo = Object.freeze({});然后对于该对象，你就真的不能操作啦
+	//方法如下
+	var constantize = (obj) => {
+	  Object.freeze(obj);
+	  Object.keys(obj).forEach( (key, i) => {
+	    if ( typeof obj[key] === 'object' ) {
+	      constantize( obj[key] );
+	    }
+	  });
+	};
+	知识补充：
+	Object.keys() 方法会返回一个由给定对象的自身可枚举属性组成的数组，数组中属性名的排列顺序和使用 for...in 循环遍历该对象时返回的顺序一致 （两者的主要区别是 一个 for-in 循环还会枚举其原型链上的属性）。

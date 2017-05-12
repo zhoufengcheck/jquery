@@ -76,15 +76,18 @@ function randomString(n){
 //Q9 实现类似getElementsByClassName 的功能
 function queryClassName(node, name) {  
 	console.log(node)
-  var starts = '(^|[ \n\r\t\f])',
-       ends = '([ \n\r\t\f]|$)';
-  var array = [],
+  	var starts = '(^|[ \n\r\t\f])',
+  	//\t 制表符
+	//\r 回车符
+	//\n 换行符
+	//\f 换页符
+   	ends = '([ \n\r\t\f]|$)';
+  	var array = [],
         regex = new RegExp(starts + name + ends),
         elements = node.getElementsByTagName("*"),
         length = elements.length,
         i = 0,
         element;
-
     while (i < length) {
         element = elements[i];
         if (regex.test(element.className)) {

@@ -29,7 +29,37 @@ function checkPalindrom(str) {
 
 
 //Q2 去掉一组整型数组重复的值
-function Unique(arr){
+Array.prototype.unique3=function(){
+	var result=[this[0]];
+	this.sort()
+	for(var i=1;i<this.length;i++){
+		if(this[i]!=result[result.length-1]){
+			result.push(this[i]);
+		}
+	}
+	return result;
+}
+Array.prototype.unique4=function(){
+			var arr=[];    //定义一个临时数组  
+	        for(var i = 0; i < this.length; i++){           
+	            if(this.indexOf(this[i])==i){  
+	                arr.push(this[i]);  
+	            }  
+	        }  
+	        return arr;  
+		}
+Array.prototype.unique2=function(){//
+	var arr=[];    //定义一个临时数组  
+    for(var i = 0; i < this.length; i++){    //循环遍历当前数组  
+        //判断当前数组下标为i的元素是否已经保存到临时数组  
+        //如果已保存，则跳过，否则将此元素保存到临时数组中  
+        if(arr.indexOf(this[i]) == -1){  
+            arr.push(this[i]);  
+        }  
+    }  
+    return arr;  
+}
+function Unique1(arr){
 	if(!typeOf(arr,'Array')){
 		console.log('参数问题，请从新传参数');
 		return
@@ -49,35 +79,29 @@ function Unique(arr){
 	return result
 }
 //Q3 统计一个字符串出现最多的字母
-function findMaxDuplicateChar(str){
-	var max=0;
-	var result_char="";
+String.prototype.findMaxDuplicateChar=function(){
+	var max=0;//个数
+	var result_char="";//返回值
 	var obj={};
-	if(!typeOf(str,'String')){
-		console.log('参数问题，请从新传参数');
-		return
+	if(this.length==0){
+		return this
 	}
-	if(str.length==0){
-		return str
-	}
-	for(var i=0;i<str.length;i++){
-		if(obj[str.charAt(i)]==undefined){
-			obj[str.charAt(i)]=1
+	for(var i=0;i<this.length;i++){
+		if(obj[this.charAt(i)]==undefined){
+			obj[this.charAt(i)]=1
 		}else{
-			obj[str.charAt(i)]=obj[str.charAt(i)]+1
+			obj[this.charAt(i)]=obj[this.charAt(i)]+1
+		}
+		if(max<obj[this.charAt(i)]){
+			max=obj[this.charAt(i)];
+			result_char=this.charAt(i);
 		}
 	}
-	for (chars in obj){
-		if(max<obj[chars]){
-			max=obj[chars]
-			result_char=chars
-		}
-	}
-	console.log(result_char)
+	console.log(max)
 	return result_char
 }
 
-//Q4 冒泡排序算法 小到大 每比较一次，就把最小的提到最前面去
+//Q4 冒泡排序算法 小到大 每比较一次，就把最小的提到最前面去（后续的的每一个数都和第一个数比较，小就交换）
 function bubbleSort(arr){
 	var temp
 	for(var i=0;i<arr.length;i++){

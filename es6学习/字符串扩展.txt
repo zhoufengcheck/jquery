@@ -1,0 +1,39 @@
+内容比较多 ，我这里只写一部分，不懂的就参照文档吧
+
+模板字符串（template string）
+	是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量
+	1:基本
+		a：普通字符串
+		`In JavaScript \n is a line-feed.`
+		b：多行字符串
+		`In JavaScript this is
+	 	not legal.`
+	 	c：字符串中嵌入变量
+		var name = "Bob", time = "today";
+		`Hello ${name}, how are you ${time}?`
+		d：转义字符
+		   如果在模板字符串中需要使用反引号，则前面要用反斜杠转义。
+		var greeting = `\`Yo\` World!`;
+		e：如果使用模板字符串表示多行字符串，所有的空格和缩进都会被保留在输出之中。
+			$('#list').html(`
+				<ul>
+				  <li>first</li>
+				  <li>second</li>
+				</ul>
+				`.trim()//用trim()可以消除
+			);
+		f:${}--->模板字符串中嵌入变量，需要将变量名写在${}之中。
+			var x = 1;
+			var y = 2;
+
+			`${x} + ${y} = ${x + y}`
+			// "1 + 2 = 3"
+
+			 模板字符串之中还能调用函数。
+			 function fn() {
+			  return "Hello World";
+			}
+
+			`foo ${fn()} bar`
+			// foo Hello World bar
+
